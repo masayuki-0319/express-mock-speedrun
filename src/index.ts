@@ -1,11 +1,11 @@
 import express from "express";
-import * as bodyParser from "body-parser";
+import {json, urlencoded} from "body-parser";
 
 const app = express();
 const router = express.Router();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(json());
+app.use(urlencoded({ extended: false }));
 
 router.get(
   "/",
