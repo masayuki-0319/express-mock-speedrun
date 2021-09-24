@@ -1,11 +1,11 @@
 import express from 'express';
 import { json, urlencoded } from 'body-parser';
 
-const app = express();
+const server = express();
 const router = express.Router();
 
-app.use(json());
-app.use(urlencoded({ extended: false }));
+server.use(json());
+server.use(urlencoded({ extended: false }));
 
 router.get(
   '/',
@@ -14,10 +14,10 @@ router.get(
   }
 );
 
-app.use('/', router);
+server.use('/', router);
 
-app.listen(3000, () => {
+server.listen(3000, () => {
   console.log('listening on port 3000');
 });
 
-export default app;
+export default server;
