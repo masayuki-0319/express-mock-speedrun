@@ -12,15 +12,13 @@ const level = () => {
   const env = process.env.NODE_ENV || 'development';
   const isDevelopment = env === 'development';
 
-  return isDevelopment ? 'debug' : 'info';
+  return isDevelopment ? 'debug' : 'http';
 };
 
 const format = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
   winston.format.colorize({ all: true }),
-  winston.format.printf(
-    (info) => `${info.timestamp} ${info.level}: ${info.message}`
-  )
+  winston.format.printf((log) => `${log.timestamp},${log.level},${log.message}`)
 );
 
 // TODO: logs ディレクトリのパスを検討すること
@@ -49,5 +47,6 @@ const levelColorOption = {
 };
 
 winston.addColors(levelColorOption);
+const logger = winston.createLogger(loggerOptions);
 
-export const Logger = winston.createLogger(loggerOptions);
+export { logger };

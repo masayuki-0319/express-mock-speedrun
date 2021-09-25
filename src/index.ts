@@ -5,8 +5,8 @@ import config from './config/index';
 
 const server = express();
 
-api(server);
 config(server);
+api(server);
 
 server.listen(3000, () => {
   console.log('listening on port 3000');
