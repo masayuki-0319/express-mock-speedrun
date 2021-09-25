@@ -20,4 +20,4 @@ const requestLogger = morgan(format, {
   skip,
 });
 
-export default requestLogger;
+export { requestLogger };

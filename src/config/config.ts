@@ -1,7 +1,7 @@
 import { Express } from 'express';
 import { json, urlencoded } from 'body-parser';
 
-import requestLogger from './logger/morgan';
+import { requestLogger } from './logger/morgan';
 
 const config = (server: Express) => {
   server.use(json());
