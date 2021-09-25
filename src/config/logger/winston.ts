@@ -1,4 +1,8 @@
+import path from 'path';
 import winston, { LoggerOptions } from 'winston';
+
+const LOG_DIR = path.join(__dirname, '../../log');
+const APP_ENV = process.env.NODE_ENV || 'development';
 
 const levels = {
   error: 0,
@@ -9,8 +13,7 @@ const levels = {
 };
 
 const level = () => {
-  const env = process.env.NODE_ENV || 'development';
-  const isDevelopment = env === 'development';
+  const isDevelopment = APP_ENV === 'development';
 
   return isDevelopment ? 'debug' : 'http';
 };
@@ -21,14 +24,15 @@ const format = winston.format.combine(
   winston.format.printf((log) => `${log.timestamp},${log.level},${log.message}`)
 );
 
-// TODO: logs ディレクトリのパスを検討すること
+const APPLICATION_LOGFILE = `${LOG_DIR}/${APP_ENV}.log`;
+const ERROR_LOGFILE = `${LOG_DIR}/${APP_ENV}.error.log`;
 const transports = [
   new winston.transports.Console(),
   new winston.transports.File({
-    filename: 'logs/error.log',
+    filename: ERROR_LOGFILE,
     level: 'error',
   }),
-  new winston.transports.File({ filename: 'logs/all.log' }),
+  new winston.transports.File({ filename: APPLICATION_LOGFILE }),
 ];
 
 const loggerOptions: LoggerOptions = {
