@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -L",
+    "dev": "nodemon -L --delay 1",
     "build": "webpack --config ./webpack/prod.config.ts",
     "start": "npm run build && node dist/server.js"
   },
