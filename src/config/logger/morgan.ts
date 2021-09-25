@@ -15,9 +15,9 @@ const skip = () => {
 };
 
 const format = ':method :url :status :res[content-length] - :response-time ms';
-const RequestLogger = morgan(format, {
+const requestLogger = morgan(format, {
   stream,
   skip,
 });
 
-export { RequestLogger };
+export default requestLogger;
